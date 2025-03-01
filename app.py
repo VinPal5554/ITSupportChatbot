@@ -18,5 +18,29 @@ cursor.execute('''
 
 conn.commit()
 conn.close()
-print("Database initialized successfully!")
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
+@app.route('/ask', methods=['POST'])
+def ask():
+    user_input = request.form['user_input']
+
+    # Here you would add logic to handle the user's issue.
+    if 'wifi' in user_input.lower():
+        response = "Have you tried restarting your router?"
+    elif 'slow' in user_input.lower():
+        response = "Have you tried clearing your browser cache?"
+    else:
+        response = "Sorry, I couldn't find a solution for that."
+
+    return render_template('index.html', response=response)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
 

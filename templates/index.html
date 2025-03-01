@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Support Chatbot</title>
 </head>
 <body>
+    <h1>IT Support Chatbot</h1>
 
+    <form action="/ask" method="POST">
+        <label for="user_input">Describe your issue:</label>
+        <input type="text" id="user_input" name="user_input" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if response %}
+        <h2>Response: </h2>
+        <p>{{ response }}</p>
+    {% endif %}
 </body>
 </html>
