@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT Support Chatbot</title>
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
     <h1>IT Support Chatbot</h1>
@@ -15,8 +16,19 @@
     </form>
 
     {% if response %}
-        <h2>Response: </h2>
-        <p>{{ response }}</p>
+        <p><strong>Chatbot:</strong> {{ response }}</p>
     {% endif %}
+
+    <div id="start">
+        <h2>What problem are you experiencing?</h2>
+        <button onclick="startHardwareProblem()">Hardware Problem</button>
+        <button onclick="startSoftwareProblem()">Software Problem</button>
+    </div>
+
+    <div id="question" style="display:none;">
+        <h2 id="question-text"></h2>
+        <input type="text" id="user-input" placeholder="Type your answer here...">
+        <button onclick="processAnswer()">Submit</button>
+    </div>
 </body>
 </html>
