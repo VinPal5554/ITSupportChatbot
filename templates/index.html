@@ -9,21 +9,23 @@
 <body>
     <h1>IT Support Chatbot</h1>
 
-    <form action="/ask" method="POST">
-        <label for="user_input">Describe your issue:</label>
-        <input type="text" id="user_input" name="user_input" required>
-        <button type="submit">Submit</button>
+    <form action="/ask" method="post">
+    <input type="text" name="user_input" placeholder="Describe your issue...">
+    <button type="submit">Submit</button>
     </form>
 
-    {% if response %}
-        <p><strong>Chatbot:</strong> {{ response }}</p>
+    <form action="/answer" method="post">
+    <input type="hidden" name="question_id" value="{{ question_id }}">
+    <p>{{ question }}</p> <!-- Display the current question -->
+    <button type="submit" name="response" value="yes">Yes</button>
+    <button type="submit" name="response" value="no">No</button>
+    </form>
+
+    {% if solution %}
+        <p><strong>Solution:</strong> {{ solution }}</p>
     {% endif %}
 
-    <div id="start">
-        <h2>What problem are you experiencing?</h2>
-        <button onclick="startHardwareProblem()">Hardware Problem</button>
-        <button onclick="startSoftwareProblem()">Software Problem</button>
-    </div>
+
 
     <div id="question" style="display:none;">
         <h2 id="question-text"></h2>
