@@ -9,28 +9,34 @@
 <body>
     <h1>IT Support Chatbot</h1>
 
-    <form action="/ask" method="post">
-    <input type="text" name="user_input" placeholder="Describe your issue...">
-    <button type="submit">Submit</button>
-    </form>
-
-    <form action="/answer" method="post">
-    <input type="hidden" name="question_id" value="{{ question_id }}">
-    <p>{{ question }}</p> <!-- Display the current question -->
-    <button type="submit" name="response" value="yes">Yes</button>
-    <button type="submit" name="response" value="no">No</button>
-    </form>
-
-    {% if solution %}
-        <p><strong>Solution:</strong> {{ solution }}</p>
-    {% endif %}
-
-
-
-    <div id="question" style="display:none;">
-        <h2 id="question-text"></h2>
-        <input type="text" id="user-input" placeholder="Type your answer here...">
-        <button onclick="processAnswer()">Submit</button>
+    <div class="chat-container">
+        <!-- Display the conversation -->
+        {% if conversation_history %}
+            {% for message in conversation_history %}
+                <div class="message {% if message.role == 'bot' %}bot-message{% else %}user-message{% endif %}">
+                    {{ message.message }}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
+
+    <div class="input-container">
+        <form action="/ask" method="POST">
+            <input type="text" name="user_input" placeholder="Describe your issue..." required>
+            <button type="submit">Send</button>
+        </form>
+
+        {% if question %}
+            <form action="/response" method="POST">
+                <div>{{ question }}</div>
+                <button type="submit" name="response" value="yes">Yes</button>
+                <button type="submit" name="response" value="no">No</button>
+            </form>
+        {% endif %}
+    </div>
+
+
+
+
 </body>
 </html>
