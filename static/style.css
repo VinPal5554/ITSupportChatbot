@@ -5,13 +5,15 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
+    max-height: 500px; /* Limit height of the container */
+    overflow-y: auto; /* Enable scrolling if the chat grows too long */
 }
 
 .message {
     margin: 10px 0;
     padding: 10px;
     border-radius: 5px;
-    display: inline-block;
+    display: block;
 }
 
 .bot-message {
